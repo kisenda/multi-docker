@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker 
+
+before_install:
+  - docker build -t kisenda/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run kisenda/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t kisenda/multi-client ./client
+  - docker build -t kisenda/multi-nginx ./nginx
+  - docker build -t kisenda/multi-server ./server
+  - docker build -t kisenda/multi-worker ./worker
+  # log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin  
+  # Take those images and push it in Docker hub
+  - docker push kisenda/multi-client
+  - docker push kisenda/multi-nginx
+  - docker push kisenda/multi-server
+  - docker push kisenda/multi-worker
