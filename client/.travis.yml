@@ -7,7 +7,7 @@ before_install:
   - docker build -t kisenda/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true kisenda/react-test npm run test -- --coverage
+  - docker run -e CI=true kisenda/react-test npm run test 
 
 after_success:
   - docker build -t kisenda/multi-client ./client
