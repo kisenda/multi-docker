@@ -13,4 +13,4 @@ jalankan docker build -f Dockerfile.dev . (utk ke 2x-nya)
 
 lalu utk eksekusi : docker run -p 3000:3000 'UUID yg terbentuk dari proses diatas' (-p mapping port / menyamakan alamat dan tempat tujuan )
 
-catatan sementara UUID : df9381ea8a5bc08df75db784f9b41a81f545f07e6eee0493ed9a73cf215f67dc
+docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app UUID (ada revisi : lihat di materi 70 )
